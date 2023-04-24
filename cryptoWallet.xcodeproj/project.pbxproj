@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1B5D0C7E6A6A11F226B78F7B /* Pods_cryptoWallet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78CCF3382161AC5948B1173F /* Pods_cryptoWallet.framework */; };
+		BEA4B71129F714E100207A32 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA4B71029F714E100207A32 /* LoginViewController.swift */; };
 		BEFCC6D429EDEA100027B0BE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFCC6D329EDEA100027B0BE /* AppDelegate.swift */; };
 		BEFCC6D629EDEA100027B0BE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFCC6D529EDEA100027B0BE /* SceneDelegate.swift */; };
 		BEFCC6D829EDEA100027B0BE /* CoinsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFCC6D729EDEA100027B0BE /* CoinsTableViewController.swift */; };
@@ -21,6 +22,7 @@
 /* Begin PBXFileReference section */
 		2ABF760518AE87C8E1DC7263 /* Pods-cryptoWallet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cryptoWallet.debug.xcconfig"; path = "Target Support Files/Pods-cryptoWallet/Pods-cryptoWallet.debug.xcconfig"; sourceTree = "<group>"; };
 		78CCF3382161AC5948B1173F /* Pods_cryptoWallet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cryptoWallet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BEA4B71029F714E100207A32 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		BEFCC6D029EDEA100027B0BE /* cryptoWallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cryptoWallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEFCC6D329EDEA100027B0BE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BEFCC6D529EDEA100027B0BE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -63,6 +65,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		BEA4B70F29F713CE00207A32 /* TableView */ = {
+			isa = PBXGroup;
+			children = (
+				BEFCC6D729EDEA100027B0BE /* CoinsTableViewController.swift */,
+				BEFCC6E729EDECC30027B0BE /* CoinListModel.swift */,
+				BEFCC6E929EDEF580027B0BE /* CoinListViewPresenter.swift */,
+			);
+			path = TableView;
+			sourceTree = "<group>";
+		};
 		BEFCC6C729EDEA100027B0BE = {
 			isa = PBXGroup;
 			children = (
@@ -86,9 +98,8 @@
 			children = (
 				BEFCC6D329EDEA100027B0BE /* AppDelegate.swift */,
 				BEFCC6D529EDEA100027B0BE /* SceneDelegate.swift */,
-				BEFCC6D729EDEA100027B0BE /* CoinsTableViewController.swift */,
-				BEFCC6E729EDECC30027B0BE /* CoinListModel.swift */,
-				BEFCC6E929EDEF580027B0BE /* CoinListViewPresenter.swift */,
+				BEA4B71029F714E100207A32 /* LoginViewController.swift */,
+				BEA4B70F29F713CE00207A32 /* TableView */,
 				BEFCC6D929EDEA100027B0BE /* Main.storyboard */,
 				BEFCC6DC29EDEA110027B0BE /* Assets.xcassets */,
 				BEFCC6DE29EDEA110027B0BE /* LaunchScreen.storyboard */,
@@ -212,6 +223,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BEA4B71129F714E100207A32 /* LoginViewController.swift in Sources */,
 				BEFCC6EA29EDEF580027B0BE /* CoinListViewPresenter.swift in Sources */,
 				BEFCC6E829EDECC30027B0BE /* CoinListModel.swift in Sources */,
 				BEFCC6D829EDEA100027B0BE /* CoinsTableViewController.swift in Sources */,
