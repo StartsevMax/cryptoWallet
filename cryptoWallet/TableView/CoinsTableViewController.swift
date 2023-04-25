@@ -47,10 +47,10 @@ final class CoinListViewController: UIViewController {
     @objc func sortDidClicked(_ sender: AnyObject){
         if sender.titleLabel?.text == "Asc ↑" {
             sortButton.setTitle("Desc ↓", for: .normal)
-            presenter.sortAsc()
+            presenter.sort { $0.price > $1.price }
         } else {
             sortButton.setTitle("Asc ↑", for: .normal)
-            presenter.sortDesc()
+            presenter.sort { $0.price < $1.price }
         }
         tableView.reloadData()
     }

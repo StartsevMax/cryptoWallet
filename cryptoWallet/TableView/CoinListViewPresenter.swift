@@ -15,7 +15,6 @@ protocol CoinListViewProtocol: AnyObject {
 
 protocol CoinListPresenterProtocol: AnyObject {
     
-    // Устанавливаем View для Presenter
     func setView(_ view: CoinListViewProtocol)
 
     func numberOfSections() -> Int
@@ -28,10 +27,7 @@ protocol CoinListPresenterProtocol: AnyObject {
 
     func coinPriceForRow(at indexPath: IndexPath) -> Float
     
-    func sortAsc()
-    
-    func sortDesc()
-    
+    func sort(condition: (CoinInfo, CoinInfo) -> Bool)
 }
 
 final class CoinListPresenter: CoinListPresenterProtocol {
@@ -66,14 +62,9 @@ final class CoinListPresenter: CoinListPresenterProtocol {
 
     }
     
-    func sortAsc() {
-        model.sortAsc()
+    func sort(condition: ((CoinInfo, CoinInfo) -> Bool)) {
+        model.sort(condition: condition)
     }
-    
-    func sortDesc() {
-        model.sortDesc()
-    }
-    
 }
 
 

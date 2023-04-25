@@ -27,14 +27,10 @@ struct CoinListModel {
         privateCoinList = [bitcoin, tether, dogecoin]
     }
     
-    mutating func sortAsc() {
-        privateCoinList.sort { $0.price > $1.price }
+    mutating func sort(condition: ((CoinInfo, CoinInfo) -> Bool)) {
+        privateCoinList.sort(by: condition)
     }
-    
-    mutating func sortDesc() {
-        privateCoinList.sort { $0.price < $1.price }
-    }
-    
+
 }
 
 struct CoinInfo {
