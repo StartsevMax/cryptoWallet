@@ -8,11 +8,7 @@
 import UIKit
 
 struct ResponseData: Decodable {
-    let status: Status
-    let data: [CoinInfo]
+    let status: String
+    let coins: [CoinInfo]
 }
 
-struct Status: Decodable {
-    let elapsed: String
-    let timestamp: String
-}

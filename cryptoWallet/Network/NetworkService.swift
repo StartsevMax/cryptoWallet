@@ -7,32 +7,29 @@
 
 import UIKit
 
-class NetworkService {
+protocol NetworkServiceProtocol {
     
-    var tableViewDelegate: TableViewProtocol?
-    
-    func getResponseData() {
-        let fullUrl = URL(string: "https://data.messari.io/api/v1/assets?fields=id,slug,symbol,metrics")!
-        
-        var request = URLRequest(url: fullUrl)
-        request.httpMethod = "GET"
-        request.allHTTPHeaderFields = ["accept": "application/json"]
-        request.httpBody = nil
-        var responseData: ResponseData?
-        let queue = DispatchQueue.global(qos: .utility)
-        queue.async {
-            let task = URLSession.shared.dataTask(with: request) { data, response, error in
-                if let error = error {
-                    print(error)
-                } else {
-                    if let data = data {
-                        responseData = try! JSONDecoder().decode(ResponseData.self, from: data)
-                        self.tableViewDelegate?.didReceiveTableData(result: responseData)
-                    }
-                }
+    func getCoins(completion: @escaping (Result<ResponseData?, Error>) -> Void)
+
+}
+
+class NetworkService: NetworkServiceProtocol {
+    func getCoins(completion: @escaping (Result<ResponseData?, Error>) -> Void) {
+        let urlString = "https://data.messari.io/api/v1/assets?fields=id,slug,symbol,metrics"
+        guard let url = URL(string: urlString) else { return }
+        URLSession.shared.dataTask(with: url) { data, _, error in
+            if let error = error {
+                completion(.failure(error))
+                return
             }
-            task.resume()
-        }
+            
+            do {
+                let obj = try JSONDecoder().decode(ResponseData.self, from: data!)
+                completion(.success(obj))
+            } catch {
+                completion(.failure(error))
+            }
+        }.resume()
     }
 }
 

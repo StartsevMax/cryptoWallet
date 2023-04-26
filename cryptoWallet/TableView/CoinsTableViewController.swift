@@ -8,12 +8,6 @@
 import UIKit
 import SnapKit
 
-protocol TableViewProtocol {
-    
-    func didReceiveTableData(result: ResponseData?)
-
-}
-
 final class CoinListViewController: UIViewController {
         
     private let tableView: UITableView = {
@@ -21,10 +15,6 @@ final class CoinListViewController: UIViewController {
         tableView.rowHeight = UITableView.automaticDimension
         return tableView
     }()
-    
-    var responseData: ResponseData?
-    
-    private var networkService: NetworkService?
     
     private let presenter: CoinListPresenterProtocol = CoinListPresenter()
     
@@ -39,10 +29,6 @@ final class CoinListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.setView(self)
-        networkService = NetworkService()
-        networkService?.tableViewDelegate = self
-        networkService?.getResponseData()
         setupTable()
     }
 
@@ -137,7 +123,7 @@ extension CoinListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return responseData?.data.count ?? 0
+        return presenter.numbersOfRowInSection(section)
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -164,10 +150,10 @@ extension CoinListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? CoinListTableViewCell
-        cell?.slug.text = responseData?.data[indexPath.row].slug
-        cell?.symbol.text = responseData?.data[indexPath.row].symbol
-        cell?.price_usd.text = responseData?.data[indexPath.row].metrics.price_usd
-        cell?.percent_change_usd_last_24_hours.text = responseData?.data[indexPath.row].metrics.percent_change_usd_last_24_hours
+        cell?.slug.text = presenter.coinSlugForRow(at: indexPath)
+        cell?.symbol.text = presenter.coinSymbolForRow(at: indexPath)
+        cell?.price_usd.text = presenter.coinPriceUsdForRow(at: indexPath)
+        cell?.percent_change_usd_last_24_hours.text = presenter.coinPricePercentChangeUsdLast24HoursForRow(at: indexPath)
         return cell ?? UITableViewCell()
     }
     
@@ -185,18 +171,17 @@ extension CoinListViewController: UITableViewDelegate {
 // MARK: - ColorListViewProtocol
 
 extension CoinListViewController: CoinListViewProtocol {
+    func success() {
+        tableView.reloadData()
+    }
+    
+    func failure(error: Error) {
+        print(error.localizedDescription)
+    }
+    
 
     func reloadTable() {
         tableView.reloadData()
     }
 
-}
-
-extension CoinListViewController: TableViewProtocol {
-    func didReceiveTableData(result: ResponseData?) {
-        self.responseData = result
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
-    }
 }

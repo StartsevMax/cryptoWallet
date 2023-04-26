@@ -7,30 +7,19 @@
 
 import UIKit
 
-struct CoinListModel {
+protocol CoinListModelProtocol {
+    var coinList: [CoinInfo]? { get set }
+    mutating func sort(condition: ((CoinInfo, CoinInfo) -> Bool))
+}
+
+struct CoinListModel: CoinListModelProtocol {
     
-    var coinList: [CoinInfo] {
-        return privateCoinList
-    }
-    
-    private var privateCoinList: [CoinInfo] = []
-    
-    init() {
-//        setupDefaultCoins()
-    }
-    
-//    private mutating func setupDefaultCoins() {
-//        let bitcoin = CoinInfo(name: "Bitcoin", symbol: "BTC", price: 29457.9346)
-//        let tether = CoinInfo(name: "Tether", symbol: "USDT", price: 1.0123)
-//        let dogecoin = CoinInfo(name: "Dogecoin", symbol: "Doge", price: 201.3412)
-//
-//        privateCoinList = [bitcoin, tether, dogecoin]
-//    }
+    var coinList: [CoinInfo]?
     
     mutating func sort(condition: ((CoinInfo, CoinInfo) -> Bool)) {
-        privateCoinList.sort(by: condition)
+        coinList?.sort(by: condition)
     }
-
+    
 }
 
 struct CoinInfo: Decodable {
