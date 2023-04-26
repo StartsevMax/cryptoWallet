@@ -8,13 +8,23 @@
 import UIKit
 import SnapKit
 
-final class CoinListViewController: UIViewController {
+protocol TableViewProtocol {
     
+    func didReceiveTableData(result: ResponseData?)
+
+}
+
+final class CoinListViewController: UIViewController {
+        
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.rowHeight = UITableView.automaticDimension
         return tableView
     }()
+    
+    var responseData: ResponseData?
+    
+    private var networkService: NetworkService?
     
     private let presenter: CoinListPresenterProtocol = CoinListPresenter()
     
@@ -30,6 +40,9 @@ final class CoinListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.setView(self)
+        networkService = NetworkService()
+        networkService?.tableViewDelegate = self
+        networkService?.getResponseData()
         setupTable()
     }
 
@@ -47,13 +60,14 @@ final class CoinListViewController: UIViewController {
     @objc func sortDidClicked(_ sender: AnyObject){
         if sender.titleLabel?.text == "Asc ↑" {
             sortButton.setTitle("Desc ↓", for: .normal)
-            presenter.sort { $0.price > $1.price }
+            presenter.sort { $0.metrics.percent_change_usd_last_24_hours > $1.metrics.percent_change_usd_last_24_hours }
         } else {
             sortButton.setTitle("Asc ↑", for: .normal)
-            presenter.sort { $0.price < $1.price }
+            presenter.sort { $0.metrics.percent_change_usd_last_24_hours < $1.metrics.percent_change_usd_last_24_hours }
         }
         tableView.reloadData()
     }
+    
 
 }
 
@@ -61,22 +75,25 @@ class CoinListTableViewCell: UITableViewCell {
     
     static let identifier = "CoinListTableViewCell"
         
-    var name: UILabel = {
+    var slug: UILabel = {
         let name = UILabel()
         name.font = UIFont.boldSystemFont(ofSize: 20)
         name.numberOfLines = 2
         return name
     }()
     
-    var symbol = UILabel()
+    let symbol = UILabel()
 
-    var price = UILabel()
+    var price_usd = UILabel()
+    
+    var percent_change_usd_last_24_hours = UILabel()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        addSubview(name)
+        addSubview(slug)
         addSubview(symbol)
-        addSubview(price)
+        addSubview(price_usd)
+        addSubview(percent_change_usd_last_24_hours)
         setupConstraints()
     }
     
@@ -86,7 +103,7 @@ class CoinListTableViewCell: UITableViewCell {
     
     private func setupConstraints() {
         
-        name.snp.makeConstraints { make in
+        slug.snp.makeConstraints { make in
             make.left.equalToSuperview().inset(20)
             make.top.equalToSuperview().inset(10)
             make.width.equalTo(200)
@@ -94,13 +111,18 @@ class CoinListTableViewCell: UITableViewCell {
                 
         symbol.snp.makeConstraints { make in
             make.left.equalToSuperview().inset(20)
-            make.top.equalTo(name.snp.bottom).offset(10)
+            make.top.equalTo(slug.snp.bottom).offset(10)
             make.bottom.equalToSuperview().inset(10)
         }
 
-        price.snp.makeConstraints { make in
+        price_usd.snp.makeConstraints { make in
             make.right.equalToSuperview().inset(20)
             make.top.equalToSuperview().inset(25)
+        }
+        
+        percent_change_usd_last_24_hours.snp.makeConstraints { make in
+            make.right.equalToSuperview().inset(20)
+            make.top.equalTo(price_usd.snp.bottom).offset(10)
         }
     }
 }
@@ -115,7 +137,7 @@ extension CoinListViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter.numbersOfRowInSection(section)
+        return responseData?.data.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -125,11 +147,8 @@ extension CoinListViewController: UITableViewDataSource {
         title.text = "Crypto currencies"
         title.font = UIFont.boldSystemFont(ofSize: 20)
         
-        
-        
         headerView.addSubview(title)
         headerView.addSubview(sortButton)
-        
         
         title.translatesAutoresizingMaskIntoConstraints = false
         title.centerXAnchor.constraint(equalTo: headerView.centerXAnchor).isActive = true
@@ -140,17 +159,15 @@ extension CoinListViewController: UITableViewDataSource {
         sortButton.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 5).isActive = true
         sortButton.bottomAnchor.constraint(equalTo: headerView.bottomAnchor, constant: -5).isActive = true
         
-
-
-        
         return headerView
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? CoinListTableViewCell
-        cell?.name.text = presenter.coinNameForRow(at: indexPath)
-        cell?.symbol.text = presenter.coinSymbolForRow(at: indexPath)
-        cell?.price.text = "\(String(presenter.coinPriceForRow(at: indexPath)))$"
+        cell?.slug.text = responseData?.data[indexPath.row].slug
+        cell?.symbol.text = responseData?.data[indexPath.row].symbol
+        cell?.price_usd.text = responseData?.data[indexPath.row].metrics.price_usd
+        cell?.percent_change_usd_last_24_hours.text = responseData?.data[indexPath.row].metrics.percent_change_usd_last_24_hours
         return cell ?? UITableViewCell()
     }
     
@@ -173,4 +190,13 @@ extension CoinListViewController: CoinListViewProtocol {
         tableView.reloadData()
     }
 
+}
+
+extension CoinListViewController: TableViewProtocol {
+    func didReceiveTableData(result: ResponseData?) {
+        self.responseData = result
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
 }

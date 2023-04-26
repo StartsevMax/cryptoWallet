@@ -21,11 +21,13 @@ protocol CoinListPresenterProtocol: AnyObject {
     
     func numbersOfRowInSection(_ section: Int) -> Int
     
-    func coinNameForRow(at indexPath: IndexPath) -> String
+    func coinSlugForRow(at indexPath: IndexPath) -> String
 
     func coinSymbolForRow(at indexPath: IndexPath) -> String
 
-    func coinPriceForRow(at indexPath: IndexPath) -> Float
+    func coinPriceUsdForRow(at indexPath: IndexPath) -> String
+    
+    func coinPricePercentChangeUsdLast24HoursForRow(at indexPath: IndexPath) -> String
     
     func sort(condition: (CoinInfo, CoinInfo) -> Bool)
 }
@@ -48,8 +50,8 @@ final class CoinListPresenter: CoinListPresenterProtocol {
         return model.coinList.count
     }
     
-    func coinNameForRow(at indexPath: IndexPath) -> String {
-        return model.coinList[indexPath.row].name
+    func coinSlugForRow(at indexPath: IndexPath) -> String {
+        return model.coinList[indexPath.row].slug
     }
     
     func coinSymbolForRow(at indexPath: IndexPath) -> String {
@@ -57,8 +59,13 @@ final class CoinListPresenter: CoinListPresenterProtocol {
 
     }
     
-    func coinPriceForRow(at indexPath: IndexPath) -> Float {
-        return model.coinList[indexPath.row].price
+    func coinPriceUsdForRow(at indexPath: IndexPath) -> String {
+        return model.coinList[indexPath.row].metrics.price_usd
+
+    }
+    
+    func coinPricePercentChangeUsdLast24HoursForRow(at indexPath: IndexPath) -> String {
+        return model.coinList[indexPath.row].metrics.percent_change_usd_last_24_hours
 
     }
     
