@@ -8,12 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		1B5D0C7E6A6A11F226B78F7B /* Pods_cryptoWallet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78CCF3382161AC5948B1173F /* Pods_cryptoWallet.framework */; };
+		9436F3222A001D8C00F31E8A /* CoinListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9436F3212A001D8C00F31E8A /* CoinListTableViewCell.swift */; };
 		BEA4B71129F714E100207A32 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA4B71029F714E100207A32 /* LoginViewController.swift */; };
 		BEC590FE29F87ED600425595 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC590FD29F87ED600425595 /* NetworkService.swift */; };
 		BEC5910129F882CC00425595 /* ResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC5910029F882CC00425595 /* ResponseData.swift */; };
 		BEFCC6D429EDEA100027B0BE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFCC6D329EDEA100027B0BE /* AppDelegate.swift */; };
 		BEFCC6D629EDEA100027B0BE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFCC6D529EDEA100027B0BE /* SceneDelegate.swift */; };
-		BEFCC6D829EDEA100027B0BE /* CoinsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFCC6D729EDEA100027B0BE /* CoinsTableViewController.swift */; };
+		BEFCC6D829EDEA100027B0BE /* CoinListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFCC6D729EDEA100027B0BE /* CoinListTableViewController.swift */; };
 		BEFCC6DB29EDEA100027B0BE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEFCC6D929EDEA100027B0BE /* Main.storyboard */; };
 		BEFCC6DD29EDEA110027B0BE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEFCC6DC29EDEA110027B0BE /* Assets.xcassets */; };
 		BEFCC6E029EDEA110027B0BE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEFCC6DE29EDEA110027B0BE /* LaunchScreen.storyboard */; };
@@ -24,13 +25,14 @@
 /* Begin PBXFileReference section */
 		2ABF760518AE87C8E1DC7263 /* Pods-cryptoWallet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cryptoWallet.debug.xcconfig"; path = "Target Support Files/Pods-cryptoWallet/Pods-cryptoWallet.debug.xcconfig"; sourceTree = "<group>"; };
 		78CCF3382161AC5948B1173F /* Pods_cryptoWallet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cryptoWallet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9436F3212A001D8C00F31E8A /* CoinListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinListTableViewCell.swift; sourceTree = "<group>"; };
 		BEA4B71029F714E100207A32 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		BEC590FD29F87ED600425595 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		BEC5910029F882CC00425595 /* ResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseData.swift; sourceTree = "<group>"; };
 		BEFCC6D029EDEA100027B0BE /* cryptoWallet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = cryptoWallet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEFCC6D329EDEA100027B0BE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BEFCC6D529EDEA100027B0BE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		BEFCC6D729EDEA100027B0BE /* CoinsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinsTableViewController.swift; sourceTree = "<group>"; };
+		BEFCC6D729EDEA100027B0BE /* CoinListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinListTableViewController.swift; sourceTree = "<group>"; };
 		BEFCC6DA29EDEA100027B0BE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BEFCC6DC29EDEA110027B0BE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BEFCC6DF29EDEA110027B0BE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -69,14 +71,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		BEA4B70F29F713CE00207A32 /* TableView */ = {
+		BEA4B70F29F713CE00207A32 /* CoinList */ = {
 			isa = PBXGroup;
 			children = (
-				BEFCC6D729EDEA100027B0BE /* CoinsTableViewController.swift */,
+				BEFCC6D729EDEA100027B0BE /* CoinListTableViewController.swift */,
 				BEFCC6E729EDECC30027B0BE /* CoinListModel.swift */,
+				9436F3212A001D8C00F31E8A /* CoinListTableViewCell.swift */,
 				BEFCC6E929EDEF580027B0BE /* CoinListViewPresenter.swift */,
 			);
-			path = TableView;
+			path = CoinList;
 			sourceTree = "<group>";
 		};
 		BEC590FF29F882B100425595 /* Network */ = {
@@ -113,7 +116,7 @@
 				BEFCC6D529EDEA100027B0BE /* SceneDelegate.swift */,
 				BEA4B71029F714E100207A32 /* LoginViewController.swift */,
 				BEC590FF29F882B100425595 /* Network */,
-				BEA4B70F29F713CE00207A32 /* TableView */,
+				BEA4B70F29F713CE00207A32 /* CoinList */,
 				BEFCC6D929EDEA100027B0BE /* Main.storyboard */,
 				BEFCC6DC29EDEA110027B0BE /* Assets.xcassets */,
 				BEFCC6DE29EDEA110027B0BE /* LaunchScreen.storyboard */,
@@ -237,10 +240,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9436F3222A001D8C00F31E8A /* CoinListTableViewCell.swift in Sources */,
 				BEA4B71129F714E100207A32 /* LoginViewController.swift in Sources */,
 				BEFCC6EA29EDEF580027B0BE /* CoinListViewPresenter.swift in Sources */,
 				BEFCC6E829EDECC30027B0BE /* CoinListModel.swift in Sources */,
-				BEFCC6D829EDEA100027B0BE /* CoinsTableViewController.swift in Sources */,
+				BEFCC6D829EDEA100027B0BE /* CoinListTableViewController.swift in Sources */,
 				BEFCC6D429EDEA100027B0BE /* AppDelegate.swift in Sources */,
 				BEFCC6D629EDEA100027B0BE /* SceneDelegate.swift in Sources */,
 				BEC5910129F882CC00425595 /* ResponseData.swift in Sources */,

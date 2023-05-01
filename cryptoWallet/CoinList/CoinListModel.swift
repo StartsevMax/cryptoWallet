@@ -34,5 +34,5 @@ struct Metrics: Decodable {
 
 struct MarketData: Decodable {
     let price_usd: Double
-//    let percent_change_usd_last_24_hours: Double
+    let percent_change_usd_last_24_hours: Double
 }

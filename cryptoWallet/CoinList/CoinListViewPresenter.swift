@@ -82,14 +82,21 @@ final class CoinListPresenter: CoinListPresenterProtocol {
     }
     
     func coinPriceUsdForRow(at indexPath: IndexPath) -> String {
-        return String(model.coinList?[indexPath.row].metrics.market_data.price_usd ?? 0)
+        let valueDouble = model.coinList?[indexPath.row].metrics.market_data.price_usd ?? 0.0
+        let valueString = String(format: "%.5f$", valueDouble)
+        return valueString
 
     }
     
     func coinPricePercentChangeUsdLast24HoursForRow(at indexPath: IndexPath) -> String {
-//        return String(model.coinList?[indexPath.row].metrics.marketData.percent_change_usd_last_24_hours ?? 0.0)
-        return ""
-
+        let valueDouble = model.coinList?[indexPath.row].metrics.market_data.percent_change_usd_last_24_hours ?? 0.0
+        var valueString = ""
+        if valueDouble > 0 {
+            valueString = String(format: "+%.5f", valueDouble)
+        } else if valueDouble < 0 {
+            valueString = String(format: "%.5f", valueDouble)
+        }
+        return valueString + "%"
     }
     
     func sort(condition: ((CoinInfo, CoinInfo) -> Bool)) {

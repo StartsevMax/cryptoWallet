@@ -44,77 +44,17 @@ final class CoinListViewController: UIViewController {
         self.tableView.frame = view.frame
     }
     
-    
-    @objc func sortDidClicked(_ sender: AnyObject){
+    @objc func sortDidClicked(_ sender: AnyObject) {
         if sender.titleLabel?.text == "Asc ↑" {
             sortButton.setTitle("Desc ↓", for: .normal)
-            presenter?.sort { $0.metrics.market_data.price_usd > $1.metrics.market_data.price_usd }
+            presenter?.sort { $0.metrics.market_data.percent_change_usd_last_24_hours > $1.metrics.market_data.percent_change_usd_last_24_hours }
         } else {
             sortButton.setTitle("Asc ↑", for: .normal)
-            presenter?.sort { $0.metrics.market_data.price_usd < $1.metrics.market_data.price_usd }
+            presenter?.sort { $0.metrics.market_data.percent_change_usd_last_24_hours < $1.metrics.market_data.percent_change_usd_last_24_hours }
         }
         tableView.reloadData()
     }
-    
-
 }
-
-class CoinListTableViewCell: UITableViewCell {
-    
-    static let identifier = "CoinListTableViewCell"
-        
-    var slug: UILabel = {
-        let name = UILabel()
-        name.font = UIFont.boldSystemFont(ofSize: 20)
-        name.numberOfLines = 2
-        return name
-    }()
-    
-    let symbol = UILabel()
-
-    var price_usd = UILabel()
-    
-    var percent_change_usd_last_24_hours = UILabel()
-
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        addSubview(slug)
-        addSubview(symbol)
-        addSubview(price_usd)
-        addSubview(percent_change_usd_last_24_hours)
-        setupConstraints()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func setupConstraints() {
-        
-        slug.snp.makeConstraints { make in
-            make.left.equalToSuperview().inset(20)
-            make.top.equalToSuperview().inset(10)
-            make.width.equalTo(200)
-        }
-                
-        symbol.snp.makeConstraints { make in
-            make.left.equalToSuperview().inset(20)
-            make.top.equalTo(slug.snp.bottom).offset(10)
-            make.bottom.equalToSuperview().inset(10)
-        }
-
-        price_usd.snp.makeConstraints { make in
-            make.right.equalToSuperview().inset(20)
-            make.top.equalToSuperview().inset(25)
-        }
-        
-        percent_change_usd_last_24_hours.snp.makeConstraints { make in
-            make.right.equalToSuperview().inset(20)
-            make.top.equalTo(price_usd.snp.bottom).offset(10)
-        }
-    }
-}
-
 
 // MARK: - UITableViewDataSource
 
@@ -158,10 +98,6 @@ extension CoinListViewController: UITableViewDataSource {
         cell?.percent_change_usd_last_24_hours.text = presenter?.coinPricePercentChangeUsdLast24HoursForRow(at: indexPath)
         return cell ?? UITableViewCell()
     }
-    
- 
-    
-
 }
 
 // MARK: - UITableViewDelegate
