@@ -10,7 +10,6 @@ import UIKit
 protocol CoinListViewProtocol: AnyObject {
     func success()
     func failure(error: Error)
-    func reloadTable()
 }
 
 protocol CoinListPresenterProtocol: AnyObject {
@@ -55,9 +54,10 @@ final class CoinListPresenter: CoinListPresenterProtocol {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let responseData):
-                    self.model.coinList = responseData?.coins ?? []
+                    self.model.coinList = responseData?.data ?? []
                     self.view?.success()
                 case .failure(let error):
+                    print(error)
                     self.view?.failure(error: error)
                 }
             }
@@ -82,12 +82,13 @@ final class CoinListPresenter: CoinListPresenterProtocol {
     }
     
     func coinPriceUsdForRow(at indexPath: IndexPath) -> String {
-        return model.coinList?[indexPath.row].metrics.price_usd ?? ""
+        return String(model.coinList?[indexPath.row].metrics.market_data.price_usd ?? 0)
 
     }
     
     func coinPricePercentChangeUsdLast24HoursForRow(at indexPath: IndexPath) -> String {
-        return model.coinList?[indexPath.row].metrics.percent_change_usd_last_24_hours ?? ""
+//        return String(model.coinList?[indexPath.row].metrics.marketData.percent_change_usd_last_24_hours ?? 0.0)
+        return ""
 
     }
     

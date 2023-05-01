@@ -16,7 +16,7 @@ final class CoinListViewController: UIViewController {
         return tableView
     }()
     
-    private let presenter: CoinListPresenterProtocol = CoinListPresenter()
+    private var presenter: CoinListPresenterProtocol?
     
     private let cellIdentifier = CoinListTableViewCell.identifier
     
@@ -29,6 +29,8 @@ final class CoinListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter = CoinListPresenter()
+        presenter?.setView(self)
         setupTable()
     }
 
@@ -46,10 +48,10 @@ final class CoinListViewController: UIViewController {
     @objc func sortDidClicked(_ sender: AnyObject){
         if sender.titleLabel?.text == "Asc ↑" {
             sortButton.setTitle("Desc ↓", for: .normal)
-            presenter.sort { $0.metrics.percent_change_usd_last_24_hours > $1.metrics.percent_change_usd_last_24_hours }
+            presenter?.sort { $0.metrics.market_data.price_usd > $1.metrics.market_data.price_usd }
         } else {
             sortButton.setTitle("Asc ↑", for: .normal)
-            presenter.sort { $0.metrics.percent_change_usd_last_24_hours < $1.metrics.percent_change_usd_last_24_hours }
+            presenter?.sort { $0.metrics.market_data.price_usd < $1.metrics.market_data.price_usd }
         }
         tableView.reloadData()
     }
@@ -119,11 +121,11 @@ class CoinListTableViewCell: UITableViewCell {
 extension CoinListViewController: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return presenter.numberOfSections()
+        return presenter?.numberOfSections() ?? 0
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter.numbersOfRowInSection(section)
+        return presenter?.numbersOfRowInSection(section) ?? 0
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -150,10 +152,10 @@ extension CoinListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? CoinListTableViewCell
-        cell?.slug.text = presenter.coinSlugForRow(at: indexPath)
-        cell?.symbol.text = presenter.coinSymbolForRow(at: indexPath)
-        cell?.price_usd.text = presenter.coinPriceUsdForRow(at: indexPath)
-        cell?.percent_change_usd_last_24_hours.text = presenter.coinPricePercentChangeUsdLast24HoursForRow(at: indexPath)
+        cell?.slug.text = presenter?.coinSlugForRow(at: indexPath)
+        cell?.symbol.text = presenter?.coinSymbolForRow(at: indexPath)
+        cell?.price_usd.text = presenter?.coinPriceUsdForRow(at: indexPath)
+        cell?.percent_change_usd_last_24_hours.text = presenter?.coinPricePercentChangeUsdLast24HoursForRow(at: indexPath)
         return cell ?? UITableViewCell()
     }
     
@@ -178,10 +180,4 @@ extension CoinListViewController: CoinListViewProtocol {
     func failure(error: Error) {
         print(error.localizedDescription)
     }
-    
-
-    func reloadTable() {
-        tableView.reloadData()
-    }
-
 }
