@@ -54,6 +54,12 @@ final class CoinListViewController: UIViewController {
         }
         tableView.reloadData()
     }
+    
+    @objc func logoutDidClicked() {
+        self.view.window?.rootViewController = LoginViewController()
+        self.view.window?.makeKeyAndVisible()
+        UserDefaults.standard.set(false, forKey: "isLogged")
+    }
 }
 
 // MARK: - UITableViewDataSource
@@ -74,13 +80,24 @@ extension CoinListViewController: UITableViewDataSource {
         let title = UILabel()
         title.text = "Crypto currencies"
         title.font = UIFont.boldSystemFont(ofSize: 20)
+        title.translatesAutoresizingMaskIntoConstraints = false
+        
+        let logout = UIButton()
+        logout.setTitle("Log out", for: .normal)
+        logout.translatesAutoresizingMaskIntoConstraints = false
+        logout.setTitleColor(.systemRed, for: .normal)
+        logout.addTarget(self, action: #selector(logoutDidClicked), for: .touchUpInside)
         
         headerView.addSubview(title)
+        headerView.addSubview(logout)
         headerView.addSubview(sortButton)
         
-        title.translatesAutoresizingMaskIntoConstraints = false
+        logout.rightAnchor.constraint(equalTo: headerView.rightAnchor, constant: -20).isActive = true
+        logout.topAnchor.constraint(equalTo: headerView.topAnchor).isActive = true
+        
         title.centerXAnchor.constraint(equalTo: headerView.centerXAnchor).isActive = true
-        title.topAnchor.constraint(equalTo: headerView.topAnchor).isActive = true
+        title.topAnchor.constraint(equalTo: logout.bottomAnchor, constant: 5).isActive = true
+        
         sortButton.addTarget(self, action: #selector(sortDidClicked), for: .touchUpInside)
         sortButton.translatesAutoresizingMaskIntoConstraints = false
         sortButton.rightAnchor.constraint(equalTo: headerView.rightAnchor, constant: -20).isActive = true
@@ -100,10 +117,11 @@ extension CoinListViewController: UITableViewDataSource {
     }
 }
 
-// MARK: - UITableViewDelegate
+ // MARK: - UITableViewDelegate
 
 extension CoinListViewController: UITableViewDelegate {
-
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    }
 }
 
 // MARK: - ColorListViewProtocol

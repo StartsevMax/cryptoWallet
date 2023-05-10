@@ -15,7 +15,6 @@
 		BEFCC6D429EDEA100027B0BE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFCC6D329EDEA100027B0BE /* AppDelegate.swift */; };
 		BEFCC6D629EDEA100027B0BE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFCC6D529EDEA100027B0BE /* SceneDelegate.swift */; };
 		BEFCC6D829EDEA100027B0BE /* CoinListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFCC6D729EDEA100027B0BE /* CoinListTableViewController.swift */; };
-		BEFCC6DB29EDEA100027B0BE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEFCC6D929EDEA100027B0BE /* Main.storyboard */; };
 		BEFCC6DD29EDEA110027B0BE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEFCC6DC29EDEA110027B0BE /* Assets.xcassets */; };
 		BEFCC6E029EDEA110027B0BE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEFCC6DE29EDEA110027B0BE /* LaunchScreen.storyboard */; };
 		BEFCC6E829EDECC30027B0BE /* CoinListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFCC6E729EDECC30027B0BE /* CoinListModel.swift */; };
@@ -33,7 +32,6 @@
 		BEFCC6D329EDEA100027B0BE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BEFCC6D529EDEA100027B0BE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		BEFCC6D729EDEA100027B0BE /* CoinListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinListTableViewController.swift; sourceTree = "<group>"; };
-		BEFCC6DA29EDEA100027B0BE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BEFCC6DC29EDEA110027B0BE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BEFCC6DF29EDEA110027B0BE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BEFCC6E129EDEA110027B0BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -117,7 +115,6 @@
 				BEA4B71029F714E100207A32 /* LoginViewController.swift */,
 				BEC590FF29F882B100425595 /* Network */,
 				BEA4B70F29F713CE00207A32 /* CoinList */,
-				BEFCC6D929EDEA100027B0BE /* Main.storyboard */,
 				BEFCC6DC29EDEA110027B0BE /* Assets.xcassets */,
 				BEFCC6DE29EDEA110027B0BE /* LaunchScreen.storyboard */,
 				BEFCC6E129EDEA110027B0BE /* Info.plist */,
@@ -187,7 +184,6 @@
 			files = (
 				BEFCC6E029EDEA110027B0BE /* LaunchScreen.storyboard in Resources */,
 				BEFCC6DD29EDEA110027B0BE /* Assets.xcassets in Resources */,
-				BEFCC6DB29EDEA100027B0BE /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -255,14 +251,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		BEFCC6D929EDEA100027B0BE /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				BEFCC6DA29EDEA100027B0BE /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		BEFCC6DE29EDEA110027B0BE /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -401,7 +389,7 @@
 				INFOPLIST_FILE = cryptoWallet/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -430,7 +418,7 @@
 				INFOPLIST_FILE = cryptoWallet/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

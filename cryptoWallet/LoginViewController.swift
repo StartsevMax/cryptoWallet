@@ -45,6 +45,7 @@ class LoginViewController: UIViewController {
         let passwordTextField = UITextField()
         passwordTextField.borderStyle = .roundedRect
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
+        passwordTextField.isSecureTextEntry = true
         return passwordTextField
     }()
     
@@ -105,11 +106,15 @@ class LoginViewController: UIViewController {
     
     @objc func loginDidClick(_ passwordTextField: UITextField) {
         if login == Credentials.login && password == Credentials.password {
+            let coinListTableViewController = CoinListViewController()
+            self.view.window?.rootViewController = coinListTableViewController
+            self.view.window?.makeKeyAndVisible()
+            UserDefaults.standard.set(true, forKey: "isLogged")
         }
     }
     
     override func viewDidLoad() {
-//        view.backgroundColor = .red
+        view.backgroundColor = .white
         view.addSubview(stackView)
         view.addSubview(loginButton)
         loginTextField.addTarget(self, action: #selector(loginDidChange(_:)), for: .editingChanged)
