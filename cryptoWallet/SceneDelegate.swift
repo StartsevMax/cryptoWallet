@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if isLogged {
             window.rootViewController = UINavigationController(rootViewController: CoinListViewController())
         } else {
-            window.rootViewController = UINavigationController(rootViewController: LoginViewController())
+            window.rootViewController = LoginViewController()
         }
         window.makeKeyAndVisible()
         self.window = window

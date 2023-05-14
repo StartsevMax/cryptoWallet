@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		1B5D0C7E6A6A11F226B78F7B /* Pods_cryptoWallet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78CCF3382161AC5948B1173F /* Pods_cryptoWallet.framework */; };
 		9436F3222A001D8C00F31E8A /* CoinListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9436F3212A001D8C00F31E8A /* CoinListTableViewCell.swift */; };
+		945073BE2A0C28130034A6E6 /* CoinDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 945073BD2A0C28130034A6E6 /* CoinDetailsViewController.swift */; };
+		94A12A6A2A0D77E3009D3540 /* DefaultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94A12A692A0D77E3009D3540 /* DefaultViewController.swift */; };
 		BEA4B71129F714E100207A32 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA4B71029F714E100207A32 /* LoginViewController.swift */; };
 		BEC590FE29F87ED600425595 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC590FD29F87ED600425595 /* NetworkService.swift */; };
 		BEC5910129F882CC00425595 /* ResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC5910029F882CC00425595 /* ResponseData.swift */; };
@@ -17,14 +19,16 @@
 		BEFCC6D829EDEA100027B0BE /* CoinListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFCC6D729EDEA100027B0BE /* CoinListTableViewController.swift */; };
 		BEFCC6DD29EDEA110027B0BE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEFCC6DC29EDEA110027B0BE /* Assets.xcassets */; };
 		BEFCC6E029EDEA110027B0BE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEFCC6DE29EDEA110027B0BE /* LaunchScreen.storyboard */; };
-		BEFCC6E829EDECC30027B0BE /* CoinListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFCC6E729EDECC30027B0BE /* CoinListModel.swift */; };
-		BEFCC6EA29EDEF580027B0BE /* CoinListViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFCC6E929EDEF580027B0BE /* CoinListViewPresenter.swift */; };
+		BEFCC6E829EDECC30027B0BE /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFCC6E729EDECC30027B0BE /* Model.swift */; };
+		BEFCC6EA29EDEF580027B0BE /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFCC6E929EDEF580027B0BE /* Presenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2ABF760518AE87C8E1DC7263 /* Pods-cryptoWallet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cryptoWallet.debug.xcconfig"; path = "Target Support Files/Pods-cryptoWallet/Pods-cryptoWallet.debug.xcconfig"; sourceTree = "<group>"; };
 		78CCF3382161AC5948B1173F /* Pods_cryptoWallet.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_cryptoWallet.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9436F3212A001D8C00F31E8A /* CoinListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinListTableViewCell.swift; sourceTree = "<group>"; };
+		945073BD2A0C28130034A6E6 /* CoinDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinDetailsViewController.swift; sourceTree = "<group>"; };
+		94A12A692A0D77E3009D3540 /* DefaultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultViewController.swift; sourceTree = "<group>"; };
 		BEA4B71029F714E100207A32 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		BEC590FD29F87ED600425595 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		BEC5910029F882CC00425595 /* ResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseData.swift; sourceTree = "<group>"; };
@@ -35,8 +39,8 @@
 		BEFCC6DC29EDEA110027B0BE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BEFCC6DF29EDEA110027B0BE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BEFCC6E129EDEA110027B0BE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BEFCC6E729EDECC30027B0BE /* CoinListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinListModel.swift; sourceTree = "<group>"; };
-		BEFCC6E929EDEF580027B0BE /* CoinListViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinListViewPresenter.swift; sourceTree = "<group>"; };
+		BEFCC6E729EDECC30027B0BE /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		BEFCC6E929EDEF580027B0BE /* Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
 		F7C69BCDCB8BD22FE7C3ACDF /* Pods-cryptoWallet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cryptoWallet.release.xcconfig"; path = "Target Support Files/Pods-cryptoWallet/Pods-cryptoWallet.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -61,6 +65,49 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		94A12A682A0D75E0009D3540 /* CoinDetails */ = {
+			isa = PBXGroup;
+			children = (
+				945073BD2A0C28130034A6E6 /* CoinDetailsViewController.swift */,
+			);
+			path = CoinDetails;
+			sourceTree = "<group>";
+		};
+		94B5B4062A0EB89F00DBAAA4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				BEFCC6E729EDECC30027B0BE /* Model.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		94B5B4072A0EB8B300DBAAA4 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				BEFCC6E929EDEF580027B0BE /* Presenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		94B5B4082A0EB8D100DBAAA4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				94A12A692A0D77E3009D3540 /* DefaultViewController.swift */,
+				94B5B4092A0EB8DE00DBAAA4 /* Login */,
+				BEA4B70F29F713CE00207A32 /* CoinList */,
+				94A12A682A0D75E0009D3540 /* CoinDetails */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		94B5B4092A0EB8DE00DBAAA4 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				BEA4B71029F714E100207A32 /* LoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		995D409DCCB2BBBCF3FF70CE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -73,9 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				BEFCC6D729EDEA100027B0BE /* CoinListTableViewController.swift */,
-				BEFCC6E729EDECC30027B0BE /* CoinListModel.swift */,
 				9436F3212A001D8C00F31E8A /* CoinListTableViewCell.swift */,
-				BEFCC6E929EDEF580027B0BE /* CoinListViewPresenter.swift */,
 			);
 			path = CoinList;
 			sourceTree = "<group>";
@@ -112,9 +157,10 @@
 			children = (
 				BEFCC6D329EDEA100027B0BE /* AppDelegate.swift */,
 				BEFCC6D529EDEA100027B0BE /* SceneDelegate.swift */,
-				BEA4B71029F714E100207A32 /* LoginViewController.swift */,
+				94B5B4082A0EB8D100DBAAA4 /* View */,
+				94B5B4072A0EB8B300DBAAA4 /* Presenter */,
+				94B5B4062A0EB89F00DBAAA4 /* Model */,
 				BEC590FF29F882B100425595 /* Network */,
-				BEA4B70F29F713CE00207A32 /* CoinList */,
 				BEFCC6DC29EDEA110027B0BE /* Assets.xcassets */,
 				BEFCC6DE29EDEA110027B0BE /* LaunchScreen.storyboard */,
 				BEFCC6E129EDEA110027B0BE /* Info.plist */,
@@ -238,8 +284,10 @@
 			files = (
 				9436F3222A001D8C00F31E8A /* CoinListTableViewCell.swift in Sources */,
 				BEA4B71129F714E100207A32 /* LoginViewController.swift in Sources */,
-				BEFCC6EA29EDEF580027B0BE /* CoinListViewPresenter.swift in Sources */,
-				BEFCC6E829EDECC30027B0BE /* CoinListModel.swift in Sources */,
+				945073BE2A0C28130034A6E6 /* CoinDetailsViewController.swift in Sources */,
+				BEFCC6EA29EDEF580027B0BE /* Presenter.swift in Sources */,
+				BEFCC6E829EDECC30027B0BE /* Model.swift in Sources */,
+				94A12A6A2A0D77E3009D3540 /* DefaultViewController.swift in Sources */,
 				BEFCC6D829EDEA100027B0BE /* CoinListTableViewController.swift in Sources */,
 				BEFCC6D429EDEA100027B0BE /* AppDelegate.swift in Sources */,
 				BEFCC6D629EDEA100027B0BE /* SceneDelegate.swift in Sources */,
@@ -390,8 +438,8 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -419,8 +467,8 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

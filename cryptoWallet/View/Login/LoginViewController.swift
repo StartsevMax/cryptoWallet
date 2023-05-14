@@ -107,7 +107,8 @@ class LoginViewController: UIViewController {
     @objc func loginDidClick(_ passwordTextField: UITextField) {
         if login == Credentials.login && password == Credentials.password {
             let coinListTableViewController = CoinListViewController()
-            self.view.window?.rootViewController = coinListTableViewController
+            let navigationVC = UINavigationController(rootViewController: coinListTableViewController)
+            self.view.window?.rootViewController = navigationVC
             self.view.window?.makeKeyAndVisible()
             UserDefaults.standard.set(true, forKey: "isLogged")
         }

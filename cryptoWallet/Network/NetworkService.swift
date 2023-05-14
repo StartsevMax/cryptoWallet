@@ -8,28 +8,27 @@
 import UIKit
 
 protocol NetworkServiceProtocol {
-    
-    func getCoins(completion: @escaping (Result<ResponseData?, Error>) -> Void)
+        
+    func getCoinData(urlString: String, completion: @escaping (Result<Response?, Error>) -> Void)
 
 }
 
 class NetworkService: NetworkServiceProtocol {
-    func getCoins(completion: @escaping (Result<ResponseData?, Error>) -> Void) {
-        let urlString = "https://data.messari.io/api/v1/assets?fields=slug,symbol,metrics/market_data"
+    
+    func getCoinData(urlString: String, completion: @escaping (Result<Response?, Error>) -> Void) {
         guard let url = URL(string: urlString) else { return }
         URLSession.shared.dataTask(with: url) { data, _, error in
             if let error = error {
                 completion(.failure(error))
                 return
             }
-            
             do {
-                let obj = try JSONDecoder().decode(ResponseData.self, from: data!)
-                completion(.success(obj))
+                let coinData = try JSONDecoder().decode(Response.self, from: data!)
+//                sleep(1)
+                completion(.success(coinData))
             } catch {
                 completion(.failure(error))
             }
         }.resume()
     }
 }
-

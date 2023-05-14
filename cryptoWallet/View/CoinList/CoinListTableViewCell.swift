@@ -69,12 +69,12 @@ class CoinListTableViewCell: UITableViewCell {
 
 class PercentChangeLabel: UILabel {
     override var text: String? {        
-        didSet {
-            guard let text = text else { return }
-            let firstCharacterIndex = String.Index(utf16Offset: 0, in: text)
-            if text[firstCharacterIndex] == "+" {
+        willSet {
+            guard let newValue = newValue else { return }
+            let firstCharacterIndex = String.Index(utf16Offset: 0, in: newValue)
+            if newValue[firstCharacterIndex] == "+" {
                 self.textColor = .systemGreen
-            } else if text[firstCharacterIndex] == "-" {
+            } else if newValue[firstCharacterIndex] == "-" {
                 self.textColor = .systemRed
             }
         }
