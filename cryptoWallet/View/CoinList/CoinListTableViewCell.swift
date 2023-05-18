@@ -12,7 +12,7 @@ class CoinListTableViewCell: UITableViewCell {
     
     static let identifier = "CoinListTableViewCell"
         
-    var slug: UILabel = {
+    var name: UILabel = {
         let slug = UILabel()
         slug.numberOfLines = 2
         return slug
@@ -30,7 +30,7 @@ class CoinListTableViewCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        addSubview(slug)
+        addSubview(name)
         addSubview(symbol)
         addSubview(price_usd)
         addSubview(percent_change_usd_last_24_hours)
@@ -49,7 +49,7 @@ class CoinListTableViewCell: UITableViewCell {
             make.width.equalTo(200)
         }
                 
-        slug.snp.makeConstraints { make in
+        name.snp.makeConstraints { make in
             make.left.equalToSuperview().inset(20)
             make.top.equalTo(symbol.snp.bottom).offset(10)
             make.bottom.equalToSuperview().inset(10)

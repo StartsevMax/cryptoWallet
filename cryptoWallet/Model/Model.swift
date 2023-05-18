@@ -18,7 +18,7 @@ struct CoinListModel: CoinListModelProtocol {
     var coinList: [CoinData]?
     var coinData: CoinData?
     
-    mutating func sort(condition: ((CoinData, CoinData) -> Bool)) {
+    mutating func sort(condition: (CoinData, CoinData) -> Bool) {
         coinList?.sort(by: condition)
     }
 }

@@ -12,10 +12,9 @@ class CoinDetailsViewController: DefaultViewController {
     private var coinName: String
     
     private var coinData: CoinData? {
-        willSet {
-            if let newValue = newValue {
-                setupUI(coinData: newValue)
-            }
+        didSet {
+            setupUI()
+            updateValues()
         }
     }
     
@@ -25,6 +24,7 @@ class CoinDetailsViewController: DefaultViewController {
         let label = UILabel()
         label.text = text
         label.numberOfLines = 2
+        label.font = UIFont.boldSystemFont(ofSize: 16)
         return label
     }
     
@@ -69,7 +69,6 @@ class CoinDetailsViewController: DefaultViewController {
         return view
     }()
     
-    
     init(coinName: String) {
         self.coinName = coinName
         super.init()
@@ -79,27 +78,29 @@ class CoinDetailsViewController: DefaultViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupUI(coinData: CoinData) {
+    private func setupUI() {
         view.addSubview(stackView)
-        
         stackView.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(20)
-            make.centerY.equalToSuperview()
-            make.width.equalTo(200)
+            make.trailing.equalToSuperview().inset(20)
+            make.centerY.equalToSuperview().offset(40)
         }
-        
-        priceUsd.text! += String(format: "%.5f", coinData.marketData.priceUsd)
-        priceBtc.text! += String(format: "%.5f", coinData.marketData.priceBtc)
-        priceEth.text! += String(format: "%.5f", coinData.marketData.priceEth)
-        volumeLast24Hours.text! += String(format: "%.5f", coinData.marketData.volumeLast24Hours)
-        realVolumeLast24Hours.text! += String(format: "%.5f", coinData.marketData.realVolumeLast24Hours)
-        volumeLast24HoursOverstatementMultiple.text! += String(format: "%.5f", coinData.marketData.volumeLast24HoursOverstatementMultiple)
-        percentChangeUsdLast1Hour.text! += String(format: "%.5f", coinData.marketData.percentChangeUsdLast1Hour)
-        percentChangeBtcLast1Hour.text! += String(format: "%.5f", coinData.marketData.percentChangeBtcLast1Hour)
-        percentChangeEthLast1Hour.text! += String(format: "%.5f", coinData.marketData.percentChangeEthLast1Hour)
-        percentChangeUsdLast24Hours.text! += String(format: "%.5f", coinData.marketData.percentChangeUsdLast24Hours)
-        percentChangeBtcLast24Hours.text! += String(format: "%.5f", coinData.marketData.percentChangeBtcLast24Hours)
-        percentChangeEthLast24Hours.text! += String(format: "%.5f", coinData.marketData.percentChangeEthLast24Hours)
+    }
+    
+    private func updateValues() {
+        guard let coinData = coinData else { return }
+        priceUsd.text? += String(format: "\n%.10f", coinData.marketData.priceUsd)
+        priceBtc.text? += String(format: "\n%.10f", coinData.marketData.priceBtc)
+        priceEth.text? += String(format: "\n%.10f", coinData.marketData.priceEth)
+        volumeLast24Hours.text? += String(format: "\n%.10f", coinData.marketData.volumeLast24Hours)
+        realVolumeLast24Hours.text? += String(format: "\n%.10f", coinData.marketData.realVolumeLast24Hours)
+        volumeLast24HoursOverstatementMultiple.text! += String(format: "\n%.10f", coinData.marketData.volumeLast24HoursOverstatementMultiple)
+        percentChangeUsdLast1Hour.text? += String(format: "\n%.10f", coinData.marketData.percentChangeUsdLast1Hour)
+        percentChangeBtcLast1Hour.text? += String(format: "\n%.10f", coinData.marketData.percentChangeBtcLast1Hour)
+        percentChangeEthLast1Hour.text? += String(format: "\n%.10f", coinData.marketData.percentChangeEthLast1Hour)
+        percentChangeUsdLast24Hours.text? += String(format: "\n%.10f", coinData.marketData.percentChangeUsdLast24Hours)
+        percentChangeBtcLast24Hours.text? += String(format: "\n%.10f", coinData.marketData.percentChangeBtcLast24Hours)
+        percentChangeEthLast24Hours.text? += String(format: "\n%.10f", coinData.marketData.percentChangeEthLast24Hours)
     }
     
     private func setupActivityIndicator() {
@@ -116,7 +117,7 @@ class CoinDetailsViewController: DefaultViewController {
         title = coinName
         presenter = Presenter()
         presenter?.setView(self)
-        presenter?.getCoinData(coinName: coinName)
+        presenter?.loadCoinData(coinName: coinName)
         setupActivityIndicator()
     }
 }
@@ -124,12 +125,21 @@ class CoinDetailsViewController: DefaultViewController {
 extension CoinDetailsViewController: ViewProtocol {
 
     func success() {
-        activityIndicator.stopAnimating()
-        coinData = presenter?.returnCoinData()
+        self.activityIndicator.stopAnimating()
+        coinData = presenter?.getCoinData()
     }
     
     func failure(error: Error) {
-        print(error)
+        self.showAlert {
+            self.presenter?.loadCoinData(coinName: self.coinName)
+        } cancelAction: {
+            self.activityIndicator.stopAnimating()
+            self.view.addSubview(self.noDataLabel)
+            self.noDataLabel.snp.makeConstraints { make in
+                make.centerX.centerY.equalToSuperview()
+            }
+        }
+
     }
 }
 

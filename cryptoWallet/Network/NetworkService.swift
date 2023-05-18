@@ -24,7 +24,6 @@ class NetworkService: NetworkServiceProtocol {
             }
             do {
                 let coinData = try JSONDecoder().decode(Response.self, from: data!)
-//                sleep(1)
                 completion(.success(coinData))
             } catch {
                 completion(.failure(error))

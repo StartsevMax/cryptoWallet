@@ -30,6 +30,7 @@ class LoginViewController: UIViewController {
         let loginTextField = UITextField()
         loginTextField.borderStyle = .roundedRect
         loginTextField.translatesAutoresizingMaskIntoConstraints = false
+        loginTextField.addTarget(self, action: #selector(loginDidChange(_:)), for: .editingChanged)
         return loginTextField
     }()
     
@@ -46,6 +47,7 @@ class LoginViewController: UIViewController {
         passwordTextField.borderStyle = .roundedRect
         passwordTextField.translatesAutoresizingMaskIntoConstraints = false
         passwordTextField.isSecureTextEntry = true
+        passwordTextField.addTarget(self, action: #selector(passwordDidChange(_:)), for: .editingChanged)
         return passwordTextField
     }()
     
@@ -56,6 +58,7 @@ class LoginViewController: UIViewController {
         loginButton.backgroundColor = .systemBlue
         loginButton.layer.cornerRadius = 5
         loginButton.translatesAutoresizingMaskIntoConstraints = false
+        loginButton.addTarget(self, action: #selector(loginDidClick(_:)), for: .touchUpInside)
         return loginButton
     }()
     
@@ -73,6 +76,9 @@ class LoginViewController: UIViewController {
     }()
     
     private func setupViews() {
+        view.addSubview(stackView)
+        view.addSubview(loginButton)
+        
         loginTextField.snp.makeConstraints { make in
             make.width.equalTo(250)
             make.height.equalTo(40)
@@ -116,11 +122,6 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         view.backgroundColor = .white
-        view.addSubview(stackView)
-        view.addSubview(loginButton)
-        loginTextField.addTarget(self, action: #selector(loginDidChange(_:)), for: .editingChanged)
-        passwordTextField.addTarget(self, action: #selector(passwordDidChange(_:)), for: .editingChanged)
-        loginButton.addTarget(self, action: #selector(loginDidClick(_:)), for: .touchUpInside)
         setupViews()
     }
 }

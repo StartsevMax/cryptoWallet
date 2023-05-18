@@ -15,26 +15,16 @@ protocol ViewProtocol: AnyObject {
 protocol PresenterProtocol: AnyObject {
     
     func setView(_ view: ViewProtocol)
-    
     func numberOfSections() -> Int
-    
     func numbersOfRowInSection(_ section: Int) -> Int
-    
     func coinNameForRow(at indexPath: IndexPath) -> String
-
     func coinSymbolForRow(at indexPath: IndexPath) -> String
-
     func coinPriceUsdForRow(at indexPath: IndexPath) -> String
-    
     func coinPricePercentChangeUsdLast24HoursForRow(at indexPath: IndexPath) -> String
-    
     func sort(sorting: Sorting)
-    
-    func getCoins(coinNames: [String])
-    
-    func getCoinData(coinName: String)
-    
-    func returnCoinData() -> CoinData?
+    func loadCoins(coinNames: [String])
+    func loadCoinData(coinName: String)
+    func getCoinData() -> CoinData?
 }
 
 final class Presenter: PresenterProtocol {
@@ -51,7 +41,7 @@ final class Presenter: PresenterProtocol {
         self.view = view
     }
     
-    func getCoins(coinNames: [String]) {
+    func loadCoins(coinNames: [String]) {
         let dispatchGroup = DispatchGroup()
         for coinName in coinNames {
             dispatchGroup.enter()
@@ -63,8 +53,8 @@ final class Presenter: PresenterProtocol {
                     case .success(let responseData):
                         if let coinData = responseData?.data {
                             self.coinList.append(coinData)
+                            dispatchGroup.leave()
                         }
-                        dispatchGroup.leave()
                     case .failure(let error):
                         self.view?.failure(error: error)
                     }
@@ -80,7 +70,7 @@ final class Presenter: PresenterProtocol {
         
     }
     
-    func getCoinData(coinName: String) {
+    func loadCoinData(coinName: String) {
         let urlString = "https://data.messari.io/api/v1/assets/\(coinName)/metrics"
         networkService?.getCoinData(urlString: urlString, completion: { [weak self] result in
             guard let self = self else { return }
@@ -140,7 +130,7 @@ final class Presenter: PresenterProtocol {
         }
     }
     
-    func returnCoinData() -> CoinData? {
+    func getCoinData() -> CoinData? {
         return model.coinData
     }
 }

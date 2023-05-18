@@ -53,12 +53,12 @@ final class CoinListViewController: DefaultViewController {
     private let coinNames = ["btc", "eth", "tron", "polkadot", "dogecoin", "tether", "stellar", "cardano", "xrp"]
     
     override func viewDidLoad() {
+        title = "Coins"
         view.backgroundColor = .white
+        setupActivityIndicator()
         presenter = Presenter()
         presenter?.setView(self)
-        presenter?.getCoins(coinNames: coinNames)
-        setupActivityIndicator()
-        activityIndicator.startAnimating()
+        presenter?.loadCoins(coinNames: coinNames)
     }
 
     private func setupActivityIndicator() {
@@ -67,10 +67,10 @@ final class CoinListViewController: DefaultViewController {
             make.centerX.equalToSuperview()
             make.centerY.equalToSuperview()
         }
+        activityIndicator.startAnimating()
     }
     
     private func setupTable() {
-        title = "Coins"
 
         view.addSubview(tableView)
         tableView.dataSource = self
@@ -80,7 +80,6 @@ final class CoinListViewController: DefaultViewController {
         tableView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-//        tableView.frame = view.safeAreaLayoutGuide.layoutFrame
     }
     
     @objc func sortDidClicked(_ sender: AnyObject) {
@@ -115,7 +114,7 @@ extension CoinListViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? CoinListTableViewCell
-        cell?.slug.text = presenter?.coinNameForRow(at: indexPath)
+        cell?.name.text = presenter?.coinNameForRow(at: indexPath)
         cell?.symbol.text = presenter?.coinSymbolForRow(at: indexPath)
         cell?.price_usd.text = presenter?.coinPriceUsdForRow(at: indexPath)
         cell?.percent_change_usd_last_24_hours.text = presenter?.coinPricePercentChangeUsdLast24HoursForRow(at: indexPath)
@@ -143,5 +142,15 @@ extension CoinListViewController: ViewProtocol {
     
     func failure(error: Error) {
         print(error)
+        self.showAlert {
+            self.presenter?.loadCoins(coinNames: self.coinNames)
+        } cancelAction: {
+            self.activityIndicator.stopAnimating()
+            self.view.addSubview(self.noDataLabel)
+            self.noDataLabel.snp.makeConstraints { make in
+                make.centerX.centerY.equalToSuperview()
+            }
+        }
+
     }
 }
